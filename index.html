@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="style.css" />
   <title>JumpFox</title>
 </head>
 
 <body>
-  <h3>JumpFox</h3>
-
-  <canvas id="canvas" width="400" height="600"></canvas>
-
-  <script src="main.js"></script>
+  <div class="game-intro">
+    <img src="./Images/run.gif" alt="" class="logo-img" />
+    <br />
+    <button id="start-button">StartGame</button>
+    <p>Use the up and down arrow to control the Fox!</p>
+    <img src="./images/arrows.png" alt="" class="arrows-img" />
+  </div>
+  <div id="game-board">
+    <h2>Score: <span>0</span></h1>
+      <canvas width="600" height="400"></canvas>
+  </div>
+  <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>

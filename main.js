@@ -1,106 +1,146 @@
-var cvs = document.getElementById("canvas");
-var ctx = cvs.getContext("2d");
+const $canvas = document.querySelector('canvas');
 
-// images
+const context = $canvas.getContext('2d');
 
-var runner = new Image();
-runner.src = "Images/run.gif";
+let gameIsRunning = true;
 
-
-var bg = new Image();
-bg.src = "Images/back.png";
-
-var fg = new Image();
-fg.src = "images/fg.png";
-
-var obstacle1 = new Image();
-obstacle1.src = "Images/platform-long.png";
-
-var obstacle2 = new Image();
-obstacle2.src = "Images/big-crate.png";
-
-
-
-//-------------images done--------------///
-
-runnerXposition = 10
-runnerYposition = 300
-gravity = 0.1;
-score = 0;
-
-// obstacles
-
-var espaçoObst = [];
-
-espaçoObst[0] = {
-  x: cvs.width,
-  y: 0
+function drawBoard() {
+  context.fillStyle = 'pink';
 }
 
-//----obstacles done---//
 
-//-run logic----//
-function runLogic() {
-  switch (this.runnerYposition) {
-    case 'ArrowUp':
-      event.preventDefault();
-      this.runnerYposition -= 25;
-      console.log("up")
-      gravity = 0;
-      break;
-    case 'ArrowDown':
-      event.preventDefault();
-      this.runnerYposition += 25;
-      console.log("down")
-      gravity = 0;
-      break;
+class Fox {
+  constructor() {
+    this.positionX = context.canvas.width / 2 - 25;
+    this.positionY = context.canvas.height - 200;
+    this.width = 50;
+    this.height = 100;
+    this.setKeyboardEventListeners();
+  }
 
+  drawFox() {
+    const foxImage = new Image();
+    foxImage.src = './Images/jump.gif';
+    context.drawImage(foxImage, this.positionX, this.positionY, this.width, this.height);
+  }
+  drawBox() {
+    const boxImage = new Image();
+    boxImage.src = './Images/big-crate.png';
+    context.drawImage(boxImage, this.positionX - 40, this.positionY - 40, this.width, this.height);   ////como desenhar a caixa abaixo da raposa ?
+  }
+
+  moveUp() {
+    if (this.positionX > this.width) {
+      this.positionY -= 40;
+      drawBox(); ///isso não deu certo
+      drawEverything();
+    }
+  }
+
+  moveDown() {
+    if (this.positionX + this.width * 2 < context.canvas.width) {
+      this.positionY += 40;
+      drawEverything();
+    }
+  }
+
+  setKeyboardEventListeners() {
+    window.addEventListener('keydown', event => {
+      switch (event.keyCode) {
+        case 38:
+          fox.moveUp();
+          break;
+        case 40:
+          fox.moveDown();
+          break;
+      }
+    });
   }
 }
-//----run logic done---//
 
-//--draw---//
-function clearScreen() {
-  ctx.clearRect(0, 0, cvs.width, cvs.height);
+let fox = new Fox();
+
+class Obstacle {
+  constructor(positionX) {
+    this.positionX = positionX;
+    this.positionY = 100;
+    this.width = 0;
+    this.height = 0;
+    this.setRandomPosition();
+  }
+
+  setRandomPosition() {
+    this.height = 10 + Math.random() * 20;
+    this.width = 100 + Math.random() * 30;
+    this.positionY = Math.random() * 200;
+  }
+
+  drawObstacle() {
+    context.fillStyle = 'yellow';
+    context.fillRect(this.positionX, this.positionY, this.width, this.height);
+  }
+
+  checkCollision() {
+    let foxX = fox.positionX;
+    let foxY = fox.positionY;
+    let foxW = fox.width;
+    let foxH = fox.height;
+
+    let obsX = this.positionX;
+    let obsY = this.positionY;
+    let obsW = this.width;
+    let obsH = this.height;
+
+    if (foxX + foxW > obsX && foxX < obsX + obsW && foxY + foxH > obsY && foxY < obsY + obsH) {
+      gameIsRunning = false;
+    }
+  }
+
+  runLogic() {
+    this.positionX -= 2;
+    this.checkCollision();
+  }
 }
-function draw() {
-  runLogic()
-  clearScreen()
-  ctx.drawImage(bg, 0, 0);
 
-  ctx.drawImage(fg, 0, cvs.height - fg.height);
-
-  ctx.drawImage(runner, this.runnerXposition, this.runnerYposition);
-
-
-  ctx.fillStyle = "white";
-  ctx.font = "20px Verdana";
-  ctx.fillText("Score : " + score, 10, cvs.height - 20);
-  requestAnimationFrame(draw);
+let obstacles = [];
+for (let i = 0; i < 50; i++) {
+  let obstacle = new Obstacle(i * 500);
+  obstacles.push(obstacle);
 }
 
+let runLogic = () => {
+  for (let obstacle of obstacles) {
+    obstacle.runLogic();
+  }
+};
 
-draw();
+const cleanCanvas = () => {
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+};
 
+window.onload = function () {
+  document.getElementById('start-button').onclick = function () {
+    startGame();
 
+    function startGame() {
+      function drawEverything() {
+        cleanCanvas();
+        drawBoard();
+        fox.drawFox();
 
+        for (let obstacle of obstacles) {
+          obstacle.drawObstacle();
+        }
+      }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      let loop = timestamp => {
+        drawEverything();
+        runLogic();
+        if (gameIsRunning) {
+          window.requestAnimationFrame(loop);
+        }
+      };
+      loop();
+    }
+  };
+};
