@@ -4,9 +4,41 @@ body {
   font-family: 'Verdana';
 }
 
+
+.MAIN{
+display: flex;
+flex-direction: row;
+
+
+}
+.Header{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+
 .game-intro {
+  display: flex;
+  align-items: flex-start;
   font-size: 18px;
   }
+
+.btn_start{
+  display: flex;
+  align-items: center;
+}
+
+.start-button{
+  color: #870007;
+  background-color: #870007;
+}
+
+.setas{
+display: flex;
+align-items: flex-start;
+}
+
 
 .logo-img {
   font-size: 30px;

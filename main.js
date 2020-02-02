@@ -5,13 +5,13 @@ const context = $canvas.getContext('2d');
 let gameIsRunning = true;
 
 function drawBoard() {
-  context.fillStyle = 'pink';
+  context.fillStyle = 'black';
 }
 
 
 class Fox {
   constructor() {
-    this.positionX = context.canvas.width / 2 - 25;
+    this.positionX = context.canvas.width - 500;
     this.positionY = context.canvas.height - 200;
     this.width = 50;
     this.height = 100;
@@ -72,11 +72,11 @@ class Obstacle {
   setRandomPosition() {
     this.height = 10 + Math.random() * 20;
     this.width = 100 + Math.random() * 30;
-    this.positionY = Math.random() * 200;
+    this.positionY = Math.random() * 15git 0;
   }
 
   drawObstacle() {
-    context.fillStyle = 'yellow';
+    context.fillStyle = 'pink';
     context.fillRect(this.positionX, this.positionY, this.width, this.height);
   }
 
