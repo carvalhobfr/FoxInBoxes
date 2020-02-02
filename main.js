@@ -6,6 +6,7 @@ var ctx = cvs.getContext("2d");
 var runner = new Image();
 runner.src = "Images/run.gif";
 
+
 var bg = new Image();
 bg.src = "Images/back.png";
 
@@ -27,7 +28,6 @@ runnerYposition = 300
 gravity = 0.1;
 score = 0;
 
-
 // obstacles
 
 var espaçoObst = [];
@@ -40,28 +40,31 @@ espaçoObst[0] = {
 //----obstacles done---//
 
 //-run logic----//
+function runLogic() {
+  switch (this.runnerYposition) {
+    case 'ArrowUp':
+      event.preventDefault();
+      this.runnerYposition -= 25;
+      console.log("up")
+      gravity = 0;
+      break;
+    case 'ArrowDown':
+      event.preventDefault();
+      this.runnerYposition += 25;
+      console.log("down")
+      gravity = 0;
+      break;
 
-switch (this.runnerYposition) {
-  case '38':
-    this.runnerYposition -= 25;
-    gravity = 5;
-    clearScreen()
-    break;
-  case '40':
-    this.runnerYposition += 25;
-    gravity = 5;
-    clearScreen()
-    break;
-
+  }
 }
-
 //----run logic done---//
 
 //--draw---//
 function clearScreen() {
-  ctx.clearRect(0, 0, 300, 200);
+  ctx.clearRect(0, 0, cvs.width, cvs.height);
 }
 function draw() {
+  runLogic()
   clearScreen()
   ctx.drawImage(bg, 0, 0);
 
