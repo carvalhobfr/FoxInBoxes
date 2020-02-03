@@ -131,13 +131,13 @@ class Obstacle {
     let obsW = this.width;
     let obsH = this.height;
 
-    if (foxX + foxW > obsX && foxX < obsX + obsW && foxY + foxH > obsY && foxY < obsY + obsH) {
+    if (foxX + foxW > obsX && foxX < obsX + obsW && foxY + foxH - 20 > obsY && foxY < obsY + obsH - 20) {
       gameIsRunning = false;
     }
   }
 
   runLogic() {
-    this.positionX -= 1;
+    this.positionX -= 2;
     this.checkCollision();
   }
 }
