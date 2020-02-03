@@ -36,7 +36,7 @@ class Obstacle {
 
 
 
-    if (foxX + foxW > obsX + obsW / 2 && foxX < obsX + obsW && foxY + foxH > obsY && foxY < obsY + obsH) {
+    if (foxX + foxW > obsX + obsW / 2 && foxX < obsX + obsW / 2 && foxY + foxH * 2 > obsY && foxY < obsY + obsH / 2) {
       this.game.gameIsRunning = false;
     }
   }

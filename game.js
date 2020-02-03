@@ -43,9 +43,13 @@ class Game {
   start() {
     this.reset();
     this.loop();
+
   }
-  
+
   reset() {
+    this.fox = new Fox(this);
+    this.obstacle = new Obstacle(this);
+    this.cleanCanvas();
     this.gameIsRunning = true;
   }
 
