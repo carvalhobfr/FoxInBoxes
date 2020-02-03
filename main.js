@@ -39,7 +39,7 @@ let background = new Background;
 class Fox {
   constructor() {
     this.positionX = context.canvas.width - 800;
-    this.positionY = context.canvas.height - 300;
+    this.positionY = context.canvas.height - 130;
     this.width = 50;
     this.height = 100;
     this.setKeyboardEventListeners();
@@ -54,9 +54,9 @@ class Fox {
   drawBox() {
     const boxImage = new Image();
     boxImage.src = './Images/big-crate.png';
-    context.drawImage(boxImage, this.positionX, this.positionY + this.height, 50, 100);
+    context.drawImage(boxImage, this.positionX, this.positionY + this.height, 40, 50);
     for (let i = 0; i < 5; i++) {
-      box.push(boxs);
+      box.push(boxs);   /// máximo de caixas na tela 11 abaixo da raposa.
     }
 
 
@@ -64,14 +64,15 @@ class Fox {
   }
 
   moveUp() {
-    if (this.positionX > this.width) {
-      this.positionY -= 40;
+    if (this.positionX > this.width && this.positionY > 0) {
+      this.positionY -= this.width;
+      drawBox()
     }
   }
 
   moveDown() {
-    if (this.positionX + this.width * 2 < context.canvas.width) {
-      this.positionY += 40;
+    if (this.positionX + this.width * 2 < context.canvas.width && this.positionY < 490) {
+      this.positionY += this.width;
 
     }
   }
@@ -133,14 +134,10 @@ class Obstacle {
     if (foxX + foxW > obsX && foxX < obsX + obsW && foxY + foxH > obsY && foxY < obsY + obsH) {
       gameIsRunning = false;
     }
-
-    else if (foxY === 0) {
-
-    }
   }
 
   runLogic() {
-    this.positionX -= 10;
+    this.positionX -= 1;
     this.checkCollision();
   }
 }
