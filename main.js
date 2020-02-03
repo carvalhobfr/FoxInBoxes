@@ -1,5 +1,7 @@
 const $canvas = document.querySelector('canvas');
 
+const game = new Game($canvas);
+
 const context = $canvas.getContext('2d');
 
 let gameIsRunning = true;
@@ -12,23 +14,23 @@ const imageUrls = new Image;
 imageUrls.src = './Images/back.png'
 
 
-class Background {
-  constructor(width, height) {
-    width = this.width;
-    height = this.height
-  }
+// class Background {
+//   constructor(width, height) {
+//     width = this.width;
+//     height = this.height
+//   }
 
-  drawBg() {
-    const $canvas = context.canvas;
-    const width = $canvas.width;
-    const height = $canvas.height;
+//   drawBg() {
+//     const $canvas = context.canvas;
+//     const width = $canvas.width;
+//     const height = $canvas.height;
 
-    const foxImage = new Image();
-    foxImage.src = './Images/back.png';
-    context.drawImage(imageUrls, this.width, this.height);
-  }
-}
-let background = new Background;
+//     const foxImage = new Image();
+//     foxImage.src = './Images/back.png';
+//     context.drawImage(imageUrls, this.width, this.height);
+//   }
+// }
+// let background = new Background;
 
 
 
@@ -45,20 +47,20 @@ class Fox {
     this.setKeyboardEventListeners();
   }
 
-
   runLogic() {
-    const head = this.body[this.body.length - 1];
-
+    const bodyFox = this.foxAndBox[this.foxAndBox.length - 1];
     const next = {
-      ...head
+      ...bodyFox
     };
 
     switch (this.direction) {
       case 'down':
         next.positionX += this.width;
+
         break;
       case 'up':
         next.positionX -= this.width;
+        this.drawBox();
         break;
     }
   };
@@ -67,6 +69,11 @@ class Fox {
     const foxImage = new Image();
     foxImage.src = './Images/jump.gif';
     context.drawImage(foxImage, this.positionX, this.positionY, this.width, this.height);
+    //////
+    /* var i;
+     for (i = 0; i < 11; i++) {
+     this.drawBox();
+ }*/
   }
 
   drawBox() {
@@ -84,13 +91,14 @@ class Fox {
   moveUp() {
     if (this.positionX > this.width && this.positionY > 0) {
       this.positionY -= this.width;
-      drawBox()
+      drawBox();
     }
   }
 
   moveDown() {
     if (this.positionX + this.width * 2 < context.canvas.width && this.positionY < 490) {
       this.positionY += this.width;
+      drawBox();
 
     }
   }
@@ -128,7 +136,7 @@ class Obstacle {
   }
 
   setRandomPosition() {
-    this.height = 10 + Math.random() * 20;
+    this.height = 10 + Math.random() * 200;
     this.width = 100 + Math.random() * 30;
     this.positionY = Math.random() * 700 + 20;
   }
@@ -180,28 +188,27 @@ const cleanCanvas = () => {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 };
 
-window.onload = function () {
-  document.getElementById('start-button').onclick = function () {
-    startGame();
+// window.onload = function () {
+document.getElementById('start-button').onclick = function () {
+  startGame();
 
-    function startGame() {
-      function drawEverything() {
-        cleanCanvas();
-        background.drawBg();
-        fox.drawFox();
-
-        for (let obstacle of obstacles) {
-          obstacle.drawObstacle();
-        }
+  function startGame() {
+    function drawEverything() {
+      cleanCanvas();
+      // background.drawBg();
+      fox.drawFox();
+      for (let obstacle of obstacles) {
+        obstacle.drawObstacle();
       }
-      let loop = timestamp => {
-        drawEverything();
-        runLogic();
-        if (gameIsRunning) {
-          window.requestAnimationFrame(loop);
-        }
-      };
-      loop();
     }
-  };
+    let loop = timestamp => {
+      drawEverything();
+      runLogic();
+      if (gameIsRunning) {
+        window.requestAnimationFrame(loop);
+      }
+    };
+    loop();
+  }
 };
+// };
