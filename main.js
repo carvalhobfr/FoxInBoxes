@@ -4,15 +4,42 @@ const context = $canvas.getContext('2d');
 
 let gameIsRunning = true;
 
-function drawBoard() {
-  context.fillStyle = 'black';
-}
 
+
+
+///bg---------------->
+const imageUrls = new Image;
+imageUrls.src = './Images/back.png'
+
+
+class Background {
+  constructor(width, height) {
+    width = this.width;
+    height = this.height
+  }
+
+  drawBg() {
+    const $canvas = context.canvas;
+    const width = $canvas.width;
+    const height = $canvas.height;
+
+    const foxImage = new Image();
+    foxImage.src = './Images/back.png';
+    context.drawImage(imageUrls, this.width, this.height);
+  }
+}
+let background = new Background;
+
+
+
+///end of bg--------<
+
+////Fox ------------------>
 
 class Fox {
   constructor() {
-    this.positionX = context.canvas.width - 500;
-    this.positionY = context.canvas.height - 200;
+    this.positionX = context.canvas.width - 800;
+    this.positionY = context.canvas.height - 300;
     this.width = 50;
     this.height = 100;
     this.setKeyboardEventListeners();
@@ -23,24 +50,29 @@ class Fox {
     foxImage.src = './Images/jump.gif';
     context.drawImage(foxImage, this.positionX, this.positionY, this.width, this.height);
   }
+
   drawBox() {
     const boxImage = new Image();
     boxImage.src = './Images/big-crate.png';
-    context.drawImage(boxImage, this.positionX - 40, this.positionY - 40, this.width, this.height);   ////como desenhar a caixa abaixo da raposa ?
+    context.drawImage(boxImage, this.positionX, this.positionY + this.height, 50, 100);
+    for (let i = 0; i < 5; i++) {
+      box.push(boxs);
+    }
+
+
+
   }
 
   moveUp() {
     if (this.positionX > this.width) {
       this.positionY -= 40;
-      drawBox(); ///isso não deu certo
-      drawEverything();
     }
   }
 
   moveDown() {
     if (this.positionX + this.width * 2 < context.canvas.width) {
       this.positionY += 40;
-      drawEverything();
+
     }
   }
 
@@ -48,17 +80,23 @@ class Fox {
     window.addEventListener('keydown', event => {
       switch (event.keyCode) {
         case 38:
-          fox.moveUp();
+          this.moveUp();
           break;
         case 40:
-          fox.moveDown();
+          this.moveDown();
           break;
       }
     });
   }
 }
-
+var boxs = [];
 let fox = new Fox();
+
+
+///End of Fox--------<
+
+
+///Obstacle-------->
 
 class Obstacle {
   constructor(positionX) {
@@ -72,12 +110,13 @@ class Obstacle {
   setRandomPosition() {
     this.height = 10 + Math.random() * 20;
     this.width = 100 + Math.random() * 30;
-    this.positionY = Math.random() * 150;
+    this.positionY = Math.random() * 700 + 20;
   }
 
   drawObstacle() {
-    context.fillStyle = 'pink';
-    context.fillRect(this.positionX, this.positionY, this.width, this.height);
+    const obstacleImage = new Image();
+    obstacleImage.src = './Images/platform-long.png';
+    context.drawImage(obstacleImage, this.positionX, this.positionY, this.width, this.height);
   }
 
   checkCollision() {
@@ -94,17 +133,21 @@ class Obstacle {
     if (foxX + foxW > obsX && foxX < obsX + obsW && foxY + foxH > obsY && foxY < obsY + obsH) {
       gameIsRunning = false;
     }
+
+    else if (foxY === 0) {
+
+    }
   }
 
   runLogic() {
-    this.positionX -= 2;
+    this.positionX -= 10;
     this.checkCollision();
   }
 }
 
 let obstacles = [];
 for (let i = 0; i < 50; i++) {
-  let obstacle = new Obstacle(i * 500);
+  let obstacle = new Obstacle(i * 800);
   obstacles.push(obstacle);
 }
 
@@ -113,6 +156,9 @@ let runLogic = () => {
     obstacle.runLogic();
   }
 };
+
+
+///End of Obstacle--------<
 
 const cleanCanvas = () => {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -125,14 +171,13 @@ window.onload = function () {
     function startGame() {
       function drawEverything() {
         cleanCanvas();
-        drawBoard();
+        background.drawBg();
         fox.drawFox();
 
         for (let obstacle of obstacles) {
           obstacle.drawObstacle();
         }
       }
-
       let loop = timestamp => {
         drawEverything();
         runLogic();

@@ -54,5 +54,7 @@ align-items: flex-start;
 }
 
 #game-board {
-  float: left;
+  float: center;
+  background-image: url(./Images/bg2.gif);
+  background-size: cover;
 }
