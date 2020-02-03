@@ -45,6 +45,24 @@ class Fox {
     this.setKeyboardEventListeners();
   }
 
+
+  runLogic() {
+    const head = this.body[this.body.length - 1];
+
+    const next = {
+      ...head
+    };
+
+    switch (this.direction) {
+      case 'down':
+        next.positionX += this.width;
+        break;
+      case 'up':
+        next.positionX -= this.width;
+        break;
+    }
+  };
+
   drawFox() {
     const foxImage = new Image();
     foxImage.src = './Images/jump.gif';
@@ -89,7 +107,8 @@ class Fox {
       }
     });
   }
-}
+};
+
 var boxs = [];
 let fox = new Fox();
 
@@ -131,7 +150,7 @@ class Obstacle {
     let obsW = this.width;
     let obsH = this.height;
 
-    if (foxX + foxW > obsX && foxX < obsX + obsW && foxY + foxH - 20 > obsY && foxY < obsY + obsH - 20) {
+    if (foxX + foxW > obsX && foxX < obsX + obsW && foxY + foxH - 20 > obsY && foxY < obsY + obsH - 30) {
       gameIsRunning = false;
     }
   }
