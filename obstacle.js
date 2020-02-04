@@ -32,17 +32,14 @@ class Obstacle {
     let obsW = this.width;
     let obsH = this.height;
 
-
-
-
-
     if (foxX + foxW > obsX + obsW / 2 && foxX < obsX + obsW / 2 && foxY + foxH * 2 > obsY && foxY < obsY + obsH / 2) {
       this.game.gameIsRunning = false;
     }
   }
 
   runLogic() {
-    this.positionX -=2 ;
+    this.positionX -= 2;
+    game.deleteBox();
     this.checkCollision();
   }
 };

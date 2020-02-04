@@ -13,8 +13,7 @@ class Game {
 
   // Create a logic that pushes new Boxes to the box array everytime you move
 
-  createaBox() {  ///ta a criar duas vezes
-    // let box = new Box(this);
+  createaBox() {  
     if (this.boxs.length < 11) {
       this.boxs.push({
         positionX: 50,
@@ -25,10 +24,36 @@ class Game {
   };
 
 
+
+
   createObstacles() {
     for (let i = 0; i < 50; i++) {
       let obstacle = new Obstacle(this, i * 500);
       this.obstacles.push(obstacle);
+      // console.log(this.obstacles);
+    }
+    // if (this.obstacles.length > 0) {
+    //   this.obstacles.push(
+    //     setRandomPosition()
+    //   )
+    // };
+  }
+
+  deleteBox() {
+    for (var i = 0; i < this.boxs.length; i++) {
+      let boxY = this.boxs[i].positionY;
+      let boxX = this.boxs[i].positionX;
+      let boxW = 50;
+      let boxH = this.boxs[i].height;
+      let obsX = 50;
+      let obsY = this.obstacles.positionY;
+      let obsH = this.obstacles.height;
+      let obsW = this.obstacles.width;
+
+      if (boxX + boxW > obsX + obsW && boxX < obsX + obsW && boxY + boxH * 2 > obsY && boxY < obsY + obsH / 2) {
+        this.box.splice(1, 2);
+        console.log("bateu a box no obj")
+      }
     }
   }
 
@@ -62,12 +87,12 @@ class Game {
 
   }
 
-  reset() {
-    this.fox = new Fox(this);
-    this.obstacle = new Obstacle(this);
-    this.cleanCanvas();
-    this.gameIsRunning = true;
-  }
+  // reset() {
+  //   this.fox = new Fox(this);
+  //   this.obstacle = new Obstacle(this);
+  //   this.cleanCanvas();
+  //   this.gameIsRunning = true;
+  // }
 
   loop = timestamp => {
     this.paint();
@@ -79,5 +104,5 @@ class Game {
   };
 
 
-}
+};
 

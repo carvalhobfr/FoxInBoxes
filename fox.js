@@ -38,11 +38,9 @@ class Fox {
       switch (event.keyCode) {
         case 38:
           this.moveUp();
-          console.log("keypressed")
           break;
         case 40:
           this.moveDown();
-          console.log("keypressed")
           break;
       }
     });
