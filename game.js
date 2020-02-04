@@ -2,28 +2,39 @@ class Game {
   constructor($canvas) {
     this.$canvas = $canvas;
     this.context = this.$canvas.getContext("2d");
-    this.obstacles = []
-    this.fox = new Fox(this)
-    this.createObstacles()
+    this.obstacles = [];
+    this.fox = new Fox(this);
+    this.createObstacles();
     this.gameIsRunning = true
+    // create an array of boxes 
+    this.boxs = [];
+  }
 
-  }
-  paint() {
-    //console.log("im paint and im running")
-    this.cleanCanvas();
-    this.fox.drawFox();
-    for (let i = 0; i < this.obstacles.length; i++) {
-      this.obstacles[i].drawObstacle();
-    }
-  }
+  // Create a logic that pushes new Boxes to the box array everytime you move
+
+  // createBox() {
+  //   let box = new Box(this.positionX, this.positionY + game.fox.height * 2);
+  //   this.boxs.push(box);
+
+  // }
+
 
   createObstacles() {
     for (let i = 0; i < 50; i++) {
-      let obstacle = new Obstacle(this, i * 800);
+      let obstacle = new Obstacle(this, i * 500);
       this.obstacles.push(obstacle);
     }
   }
 
+  paint() {
+    //console.log("im paint and im running")
+    this.cleanCanvas();
+    this.fox.drawFox();
+    //loop through the box array to draw
+    for (let i = 0; i < this.obstacles.length; i++) {
+      this.obstacles[i].drawObstacle();
+    }
+  }
   lose() {
     // this.isRunning = false;
     this.reset();

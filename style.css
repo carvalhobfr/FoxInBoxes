@@ -17,6 +17,10 @@ flex-direction: column;
   justify-content: space-between;
   width: 900px;
   height: 70px;
+  background-color:white;
+  border-radius: 1cm;
+  border-color: black;
+  border-width: 1cm;
 }
 
 .game-intro {

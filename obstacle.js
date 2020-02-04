@@ -9,14 +9,14 @@ class Obstacle {
   }
 
   setRandomPosition() {
-    this.height = 10 + Math.random() * 200;
-    this.width = 100 + Math.random() * 30;
-    this.positionY = 20 + Math.random() * 450;
+    this.height = 50 + Math.random() * 50;
+    this.width = 100 + Math.random() * 10;
+    this.positionY = 50 + Math.random() * 450;
   }
 
   drawObstacle() {
     const obstacleImage = new Image();
-    obstacleImage.src = './Images/platform-long.png';
+    obstacleImage.src = './Images/Obstacles/obs1 (4).png';
     this.game.context.drawImage(obstacleImage, this.positionX, this.positionY, this.width, this.height);
   }
 
@@ -42,7 +42,7 @@ class Obstacle {
   }
 
   runLogic() {
-    this.positionX -= 2;
+    this.positionX -=2 ;
     this.checkCollision();
   }
 };
