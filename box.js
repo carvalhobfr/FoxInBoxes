@@ -10,7 +10,6 @@ class Box {
   drawBox() {
     for (let box of this.game.boxs) {
       this.game.context.drawImage(boxImage, box.positionX, box.positionY, this.width, this.height);
-      //console.log(box);
     }
   };
 }

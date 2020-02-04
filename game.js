@@ -13,7 +13,7 @@ class Game {
 
   // Create a logic that pushes new Boxes to the box array everytime you move
 
-  createaBox() {  
+  createaBox() {
     if (this.boxs.length < 11) {
       this.boxs.push({
         positionX: 50,
@@ -23,23 +23,16 @@ class Game {
     //console.log(this.boxs)
   };
 
-
-
-
   createObstacles() {
     for (let i = 0; i < 50; i++) {
       let obstacle = new Obstacle(this, i * 500);
       this.obstacles.push(obstacle);
       // console.log(this.obstacles);
     }
-    // if (this.obstacles.length > 0) {
-    //   this.obstacles.push(
-    //     setRandomPosition()
-    //   )
-    // };
   }
 
   deleteBox() {
+    var k = false;
     for (var i = 0; i < this.boxs.length; i++) {
       let boxY = this.boxs[i].positionY;
       let boxX = this.boxs[i].positionX;
@@ -50,16 +43,24 @@ class Game {
       let obsH = this.obstacles.height;
       let obsW = this.obstacles.width;
 
-      if (boxX + boxW > obsX + obsW && boxX < obsX + obsW && boxY + boxH * 2 > obsY && boxY < obsY + obsH / 2) {
-        this.box.splice(1, 2);
-        console.log("bateu a box no obj")
-      }
+      // if (boxX + boxW > obsX + obsW && boxX < obsX + obsW && boxY + boxH * 2 > obsY && boxY < obsY + obsH / 2) 
+      if (boxX + boxW > obsX &&
+        boxX < obsX + obsW &&
+        boxY + boxH > obsY &&
+        boxY < obsY + obsH) {
+        k = true;
+      };
     }
-  }
+    // console.log(this.boxs)
+    if (k == true) {
+      this.box.pop();
+    }
 
+  }
   paint() {
     this.cleanCanvas();
     this.fox.drawFox();
+    console.dir(this.box)
     this.box.drawBox();
     //loop through the box array to draw
     for (let i = 0; i < this.obstacles.length; i++) {
