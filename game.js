@@ -4,6 +4,7 @@ class Game {
     this.context = this.$canvas.getContext("2d");
     this.obstacles = [];
     this.fox = new Fox(this);
+    this.box = new Box(this);
     this.createObstacles();
     this.gameIsRunning = true
     // create an array of boxes 
@@ -12,11 +13,16 @@ class Game {
 
   // Create a logic that pushes new Boxes to the box array everytime you move
 
-  // createBox() {
-  //   let box = new Box(this.positionX, this.positionY + game.fox.height * 2);
-  //   this.boxs.push(box);
-
-  // }
+  createaBox() {  ///ta a criar duas vezes
+    // let box = new Box(this);
+    if (this.boxs.length < 11) {
+      this.boxs.push({
+        positionX: 50,
+        positionY: 550 - GRID_SIZE * (this.boxs.length)
+      })
+    };
+    //console.log(this.boxs)
+  };
 
 
   createObstacles() {
@@ -27,9 +33,9 @@ class Game {
   }
 
   paint() {
-    //console.log("im paint and im running")
     this.cleanCanvas();
     this.fox.drawFox();
+    this.box.drawBox();
     //loop through the box array to draw
     for (let i = 0; i < this.obstacles.length; i++) {
       this.obstacles[i].drawObstacle();
@@ -44,7 +50,6 @@ class Game {
     for (let i = 0; i < this.obstacles.length; i++) {
       this.obstacles[i].runLogic();
     }
-
   }
 
   cleanCanvas = () => {
@@ -52,7 +57,7 @@ class Game {
   };
 
   start() {
-    this.reset();
+    //this.reset();
     this.loop();
 
   }

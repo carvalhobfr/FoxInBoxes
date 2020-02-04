@@ -1,17 +1,21 @@
 class Box {
   constructor(game) {
     this.game = game;
-    this.height = 50;
-    this.width = 25;
-    this.positionX = 50;
-    this.positionY = 500;
+    this.height = GRID_SIZE;
+    this.width = GRID_SIZE;
+    this.positionX = GRID_SIZE;
+    this.positionY = GRID_SIZE * 10;
   }
 
   drawBox() {
-    const boxImage = new Image();
-    console.log("draw box now!!!")
-    boxImage.src = './Images/big-crate.png';
-    this.game.context.drawImage(boxImage, game.fox.positionX + 10, game.fox.positionY + height * 2, this.width, this.height);
+    for (let box of this.game.boxs) {
+      this.game.context.drawImage(boxImage, box.positionX, box.positionY, this.width, this.height);
+      //console.log(box);
+    }
+  };
+}
 
-  }
-};
+///box.positionX game.fox.positionX + 10
+const boxImage = new Image()
+console.log("draw box now!!!")
+boxImage.src = './Images/big-crate.png';

@@ -1,10 +1,10 @@
 class Fox {
   constructor(game) {
     this.game = game;
-    this.positionX = 50;
-    this.positionY = 500;
-    this.height = 50;
-    this.width = 100;
+    this.positionX = GRID_SIZE;
+    this.positionY = GRID_SIZE * 10;
+    this.height = GRID_SIZE;
+    this.width = GRID_SIZE * 2;
     this.box = game.box;
     this.setKeyboardEventListeners()
   }
@@ -13,14 +13,15 @@ class Fox {
   drawFox() {
     const foxImage = new Image();
     foxImage.src = './Images/jump.gif';
-    this.game.context.drawImage(foxImage, this.positionX, this.positionY, 50, 100);
+    this.game.context.drawImage(foxImage, this.positionX, this.positionY, this.height, this.width);
   }
 
   moveUp() {
-    if (this.positionX + this.width < this.game.context.canvas.width && this.positionY > -50) {
+    if (this.positionX + this.width < this.game.context.canvas.width && this.positionY > -GRID_SIZE) {
       this.positionY -= this.height;
-      console.log(game.box.positionY);
     }
+    this.game.createaBox();
+    //console.log("im running")
   }
 
   moveDown() {
@@ -32,13 +33,16 @@ class Fox {
   }
 
   setKeyboardEventListeners() {
+    //console.log("im being called")
     window.addEventListener('keydown', event => {
       switch (event.keyCode) {
         case 38:
           this.moveUp();
+          console.log("keypressed")
           break;
         case 40:
           this.moveDown();
+          console.log("keypressed")
           break;
       }
     });
