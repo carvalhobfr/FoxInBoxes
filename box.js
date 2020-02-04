@@ -16,5 +16,5 @@ class Box {
 
 ///box.positionX game.fox.positionX + 10
 const boxImage = new Image()
-console.log("draw box now!!!")
+// console.log("draw box now!!!")
 boxImage.src = './Images/big-crate.png';

@@ -16,7 +16,7 @@ class Obstacle {
 
   drawObstacle() {
     const obstacleImage = new Image();
-    obstacleImage.src = './Images/Obstacles/obs1 (4).png';
+    obstacleImage.src = './Images/Obstacles/baladomario.png';
     this.game.context.drawImage(obstacleImage, this.positionX, this.positionY, this.width, this.height);
   }
 
@@ -32,7 +32,7 @@ class Obstacle {
     let obsW = this.width;
     let obsH = this.height;
 
-    if (foxX + foxW > obsX + obsW / 2 && foxX < obsX + obsW / 2 && foxY + foxH * 2 > obsY && foxY < obsY + obsH / 2) {
+    if (foxX + foxW > obsX + obsW && foxX < obsX + obsW / 2 && foxY + foxH * 2 > obsY && foxY < obsY + obsH / 2) {
       this.game.gameIsRunning = false;
     }
   }
@@ -63,17 +63,19 @@ class Obstacle {
   //     obsH
   //   }
 
-  //   console.log("fox", foxVal)
-  //   console.log("obst", obstVal)
+  //   // console.log("fox", foxVal)
+  //   // console.log("obst", obstVal)
 
   //   if (foxX + foxW == obsX + obsW && foxX == obsX + obsW && foxY + foxH > obsY && foxY > obsY + obsH) {
-  //     game.box.splice(1, 2);
+  //     this.fox.positionY += 2 * this.height;
+  //     this.game.boxs.pop();
+  //     this.game.boxs.pop();
   //     console.log("bateu a box no obj")
   //   }
   // }
 
   runLogic() {
-    this.positionX -= 2;
+    this.positionX -= 3;
     this.checkCollision();
     // for (this.game.obstacle in this.game.obstacles) {
     //   for (this.game.box in this.game.boxs) {

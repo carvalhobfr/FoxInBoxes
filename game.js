@@ -32,35 +32,30 @@ class Game {
   }
 
   deleteBox() {
-    var k = false;
-    for (var i = 0; i < this.boxs.length; i++) {
-      let boxY = this.boxs[i].positionY;
-      let boxX = this.boxs[i].positionX;
-      let boxW = 50;
-      let boxH = this.boxs[i].height;
-      let obsX = 50;
-      let obsY = this.obstacles.positionY;
-      let obsH = this.obstacles.height;
-      let obsW = this.obstacles.width;
+    for (let obstacle in this.obstacles) {
+      for (let box in this.boxs) {
+        let boxY = this.boxs[box].positionY;
+        let boxX = this.boxs[box].positionX;
+        let boxW = 50;
+        let boxH = 50;
+        let obsX = this.obstacles[obstacle].positionX;
+        let obsY = this.obstacles[obstacle].positionY;
+        let obsH = this.obstacles[obstacle].height;
+        let obsW = this.obstacles[obstacle].width;
+        // console.log("check colision", boxY, boxX, boxW, boxH, obsX, obsY, obsH, obsW);
 
-      // if (boxX + boxW > obsX + obsW && boxX < obsX + obsW && boxY + boxH * 2 > obsY && boxY < obsY + obsH / 2) 
-      if (boxX + boxW > obsX &&
-        boxX < obsX + obsW &&
-        boxY + boxH > obsY &&
-        boxY < obsY + obsH) {
-        k = true;
-      };
+        // if (boxX + boxW > obsX + obsW && boxX < obsX + obsW && boxY + boxH * 2 > obsY && boxY < obsY + obsH / 2) 
+        // console.log("i dont know")
+        if (boxX + boxW > obsX && boxX < obsX + obsW && boxY + boxH > obsY && boxY < obsY + obsH) {
+          this.boxs.pop();
+          this.fox.positionY = this.obstacle.positionY 
+        };
+      }
     }
-    // console.log(this.boxs)
-    if (k == true) {
-      this.box.pop();
-    }
-
   }
   paint() {
     this.cleanCanvas();
     this.fox.drawFox();
-    console.dir(this.box)
     this.box.drawBox();
     //loop through the box array to draw
     for (let i = 0; i < this.obstacles.length; i++) {
@@ -76,6 +71,7 @@ class Game {
     for (let i = 0; i < this.obstacles.length; i++) {
       this.obstacles[i].runLogic();
     }
+    this.deleteBox();
   }
 
   cleanCanvas = () => {
@@ -98,7 +94,7 @@ class Game {
   loop = timestamp => {
     this.paint();
     this.runLogic();
-
+    // console.log("hello")
     if (this.gameIsRunning) {
       window.requestAnimationFrame(this.loop);
     }
