@@ -8,22 +8,10 @@ class Game {
     this.createObstacles();
     this.gameIsRunning = false;
     // create an array of boxes 
-    this.boxs = [];
     this.score = 0;
     this.scoreboard = new Scoreboard(this);
   }
 
-  createaBox() {
-    if (this.boxs.length < 11) {
-      this.boxs.push({
-        positionX: 50,
-        positionY: 550 - GRID_SIZE * (this.boxs.length)
-      })
-      this.score += 1
-      console.log(this.score);
-    };
-    //console.log(this.boxs)
-  };
 
   createObstacles() {
     for (let i = 0; i < 100; i++) {

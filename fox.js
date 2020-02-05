@@ -20,7 +20,7 @@ class Fox {
     if (this.positionX + this.width < this.game.context.canvas.width && this.positionY > -GRID_SIZE) {
       this.positionY -= this.height;
     }
-    this.game.createaBox();
+    this.game.box.createaBox();
     //console.log("im running")
   }
 
