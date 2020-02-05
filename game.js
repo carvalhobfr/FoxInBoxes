@@ -6,12 +6,12 @@ class Game {
     this.fox = new Fox(this);
     this.box = new Box(this);
     this.createObstacles();
-    this.gameIsRunning = true
+    this.gameIsRunning = false;
     // create an array of boxes 
     this.boxs = [];
+    this.score = 0;
+    this.scoreboard = new Scoreboard(this);
   }
-
-  // Create a logic that pushes new Boxes to the box array everytime you move
 
   createaBox() {
     if (this.boxs.length < 11) {
@@ -19,6 +19,8 @@ class Game {
         positionX: 50,
         positionY: 550 - GRID_SIZE * (this.boxs.length)
       })
+      this.score += 1
+      console.log(this.score);
     };
     //console.log(this.boxs)
   };
@@ -30,6 +32,7 @@ class Game {
       this.positionY = 50 + Math.random() * 500;
       // console.log(this.obstacles);
     }
+    // this.score = this.score + 3;
     // for (let k = 0; k < 100; k++) {
     //   let obstacle2 = new Obstacle(this, k * 50000);
     //   this.obstacles.push(obstacle2);
@@ -37,7 +40,6 @@ class Game {
     //   // console.log(this.obstacles);
     // }
   }
-
   deleteBox() {
     let k = 0;
     for (let obstacle in this.obstacles) {
@@ -56,32 +58,28 @@ class Game {
         // console.log("i dont know")
         if (boxX + boxW > obsX && boxX < obsX + obsW && boxY + boxH > obsY && boxY < obsY + obsH) {
           k += 1;
-          this.obstacles.splice(0, 1);
-          this.cleanCanvas();
-          this.fox.drawFox();
         };
       }
     }
-    let point = 0
+
     if (k != 0) {
       this.boxs.splice(-2, 2);
+      this.obstacles.splice(0, 1);
+      this.cleanCanvas();
+      this.fox.drawFox();
       this.fox.positionY = this.fox.positionY + 2 * GRID_SIZE;
     }
-
-
   }
+
   paint() {
     this.cleanCanvas();
     this.box.drawBox();
     this.fox.drawFox();
+    this.scoreboard.paint();
     //loop through the box array to draw
     for (let i = 0; i < this.obstacles.length; i++) {
       this.obstacles[i].drawObstacle();
     }
-  }
-  lose() {
-    // this.isRunning = false;
-    this.reset();
   }
 
   runLogic() {
@@ -97,28 +95,49 @@ class Game {
   };
 
   start() {
-    //this.reset();
+    this.gameIsRunning = true;
+    // this.reset();
     this.loop();
+    // this.lose()
 
   }
 
   loop = timestamp => {
     this.runLogic();
     this.paint();
-    // console.log("hello")
-    if (this.gameIsRunning) {
+    if (this.gameIsRunning === true) {
       window.requestAnimationFrame(this.loop);
     }
   };
+
+  reset() {
+    this.boxs = []
+    this.obstacles = [];
+    this.fox = new Fox(this);
+    this.box = new Box(this);
+    this.score = 0;
+    console.log("hello")
+    this.gameIsRunning = true;
+    this.cleanCanvas();
+    this.loop();
+    this.paint();
+  }
+
 
 
 };
 
 
 
-  // reset() {
-  //   this.fox = new Fox(this);
-  //   this.obstacle = new Obstacle(this);
-  //   this.cleanCanvas();
-  //   this.gameIsRunning = true;
-  // }
+    // lose() {
+    //   if (this.isRunning == false) {
+    //     this.reset();
+    //   }
+    // }
+
+    // reset() {
+    //   this.cleanCanvas();
+    //   this.fox = new Fox(this);
+    //   this.obstacle = new Obstacle(this);
+    //   this.gameIsRunning = true;
+    // }

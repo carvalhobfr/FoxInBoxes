@@ -2,9 +2,14 @@ const $canvas = document.querySelector('canvas');
 
 const game = new Game($canvas);
 
+
+
+
 document.getElementById('start-button').onclick = function () {
-  game.reset();
+  if (game.gameIsRunning === false) {
+    game.reset();
+
+  }
 }
-
-
 game.start();
+
