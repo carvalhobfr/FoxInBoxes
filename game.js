@@ -27,8 +27,7 @@ class Game {
     for (let i = 0; i < 100; i++) {
       let obstacle = new Obstacle(this, i * 370);
       this.obstacles.push(obstacle);
-      this.positionY = 50 + Math.random() * 450;
-      this.positionX -= 10;
+      this.positionY = 50 + Math.random() * 500;
       // console.log(this.obstacles);
     }
     // for (let k = 0; k < 100; k++) {
@@ -57,17 +56,16 @@ class Game {
         // console.log("i dont know")
         if (boxX + boxW > obsX && boxX < obsX + obsW && boxY + boxH > obsY && boxY < obsY + obsH) {
           k += 1;
-
-
+          this.obstacles.splice(0, 1);
+          this.cleanCanvas();
+          this.fox.drawFox();
         };
       }
     }
+    let point = 0
     if (k != 0) {
       this.boxs.splice(-2, 2);
       this.fox.positionY = this.fox.positionY + 2 * GRID_SIZE;
-      this.fox.drawFox();
-      this.obstacles.splice(0, 1);
-
     }
 
 

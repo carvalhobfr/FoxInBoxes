@@ -39,7 +39,7 @@ class Obstacle {
 
 
   runLogic() {
-    let speed = Math.random() * 20;
+    let speed = Math.random() * 15;
     this.positionX -= speed;
     this.checkCollision();
   }
