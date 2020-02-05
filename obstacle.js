@@ -5,6 +5,7 @@ class Obstacle {
     this.positionY = 0;
     this.width = 0;
     this.height = 0;
+    this.speed = 5
     this.setRandomPosition();
   }
 
@@ -39,8 +40,8 @@ class Obstacle {
 
 
   runLogic() {
-    let speed = Math.random() * 15;
-    this.positionX -= speed;
+    // let speed = Math.random() * 15;
+    this.positionX -= this.speed;
     this.checkCollision();
   }
 };

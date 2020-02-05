@@ -3,12 +3,8 @@ class Game {
     this.$canvas = $canvas;
     this.context = this.$canvas.getContext("2d");
     this.obstacles = [];
-    this.fox = new Fox(this);
-    this.box = new Box(this);
-    this.createObstacles();
     this.gameIsRunning = false;
     this.score = 0;
-    this.scoreboard = new Scoreboard(this);
   }
 
 
@@ -36,8 +32,8 @@ class Game {
   runLogic() {
     for (let i = 0; i < this.obstacles.length; i++) {
       this.obstacles[i].runLogic();
-      this.box.deleteBox();
     }
+    this.box.deleteBox();
   }
 
   cleanCanvas = () => {
@@ -45,47 +41,39 @@ class Game {
   };
 
   start() {
-    this.gameIsRunning = true;
-    this.loop();
-
+    this.reset()
+    if (!this.gameIsRunning) {
+      this.gameIsRunning = !this.gameIsRunning;
+      this.loop();
+    }
   }
 
   loop = timestamp => {
     this.paint();
     this.runLogic();
-    if (this.gameIsRunning === true) {
+    if (this.gameIsRunning) {
       window.requestAnimationFrame(this.loop);
     }
   };
 
   reset() {
-    this.box.boxes = []
-    this.obstacles = [];
-    this.fox = new Fox(this);
-    this.box = new Box(this);
     this.score = 0;
-    console.log("hello")
-    this.gameIsRunning = true;
-    this.cleanCanvas();
-    this.loop();
-    this.paint();
+    //Reset obstacles array
+    this.obstacles = [];
+    this.createObstacles();
+    // Creates a new fox, reseting it
+    this.fox = new Fox(this);
+    // Creates a new box, reseting it
+    this.box = new Box(this);
+    this.box.boxes = []
+    //New scoreboard
+    this.scoreboard = new Scoreboard(this);
   }
-
-
-
 };
-
 
 
     // lose() {
     //   if (this.isRunning == false) {
     //     this.reset();
     //   }
-    // }
-
-    // reset() {
-    //   this.cleanCanvas();
-    //   this.fox = new Fox(this);
-    //   this.obstacle = new Obstacle(this);
-    //   this.gameIsRunning = true;
     // }

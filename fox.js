@@ -17,16 +17,15 @@ class Fox {
   }
 
   moveUp() {
+    console.log("im runnning")
     if (this.positionX + this.width < this.game.context.canvas.width && this.positionY > -GRID_SIZE) {
       this.positionY -= this.height;
+      this.game.box.createaBox();
     }
-    this.game.box.createaBox();
-    //console.log("im running")
   }
 
   moveDown() {
     if (this.positionX + this.width < this.game.context.canvas.width && this.positionY < 490) {
-
     }
   }
 

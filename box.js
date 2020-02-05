@@ -18,17 +18,44 @@ class Box {
   createaBox() {
     if (this.boxes.length < 11) {
       this.boxes.push({
-        positionX: 50,
+        positionX: this.positionX,
         positionY: 550 - GRID_SIZE * (this.boxes.length)
       })
+      console.log("BOXES LENGTH", this.boxes.length)
       this.game.score += 1
     };
-    //console.log(this.boxs)
   };
 
   deleteBox() {
+
+    // for (let obstacle of this.game.obstacles) {
+    //   for (let box of this.boxes) {
+    //     let boxY = box.positionY;
+    //     let boxX = box.positionX;
+    //     let boxW = 50;
+    //     let boxH = 50;
+    //     let obsX = obstacle.positionX;
+    //     let obsY = obstacle.positionY;
+    //     let obsH = obstacle.height;
+    //     let obsW = obstacle.width;
+
+
+    //     if (
+    //       boxX + boxW > obsX
+    //       && boxX < obsX + obsW
+    //       && boxY + boxH > obsY
+    //       && boxY < obsY + obsH
+    //     ) {
+    //       this.boxes.splice(-2, 2);
+    //       this.game.obstacles.splice(0, 1);
+    //       this.game.fox.positionY = this.game.fox.positionY + 2 * GRID_SIZE;
+    //     };
+    //   }
+    // }
+
     let k = 0;
     for (let obstacle in this.game.obstacles) {
+      //console.log(obstacle)
       for (let box in this.boxes) {
         let boxY = this.boxes[box].positionY;
         let boxX = this.boxes[box].positionX;
@@ -38,8 +65,6 @@ class Box {
         let obsY = this.game.obstacles[obstacle].positionY;
         let obsH = this.game.obstacles[obstacle].height;
         let obsW = this.game.obstacles[obstacle].width;
-
-
         if (boxX + boxW > obsX && boxX < obsX + obsW && boxY + boxH > obsY && boxY < obsY + obsH) {
           k += 1;
         };
@@ -49,14 +74,11 @@ class Box {
     if (k != 0) {
       this.boxes.splice(-2, 2);
       this.game.obstacles.splice(0, 1);
-      // this.game.fox.drawFox();
       this.game.fox.positionY = this.game.fox.positionY + 2 * GRID_SIZE;
     }
   }
 }
 
 
-///box.positionX game.game.fox.positionX + 10
 const boxImage = new Image()
-// console.log("draw box now!!!")
 boxImage.src = './Images/big-crate.png';
