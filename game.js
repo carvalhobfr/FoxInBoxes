@@ -5,6 +5,8 @@ class Game {
     this.obstacles = [];
     this.gameIsRunning = false;
     this.score = 0;
+    this.setKeyboardEventListeners();
+
   }
 
 
@@ -15,8 +17,6 @@ class Game {
       this.positionY = 50 + Math.random() * 500;
     }
   }
-
-
 
   paint() {
     this.cleanCanvas();
@@ -46,6 +46,8 @@ class Game {
       this.gameIsRunning = !this.gameIsRunning;
       this.loop();
     }
+    setKeyboardEventListeners();
+
   }
 
   loop = timestamp => {
@@ -69,6 +71,22 @@ class Game {
     //New scoreboard
     this.scoreboard = new Scoreboard(this);
   }
+
+  setKeyboardEventListeners() {
+    //console.log("im being called")
+    window.addEventListener('keydown', event => {
+      switch (event.keyCode) {
+        case 38:
+          this.fox.moveUp();
+          break;
+        case 40:
+          this.fox.moveDown();
+          break;
+      }
+    });
+  }
+
+
 };
 
 

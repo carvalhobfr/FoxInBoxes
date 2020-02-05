@@ -6,7 +6,6 @@ class Fox {
     this.height = GRID_SIZE;
     this.width = GRID_SIZE * 2;
     this.box = game.box;
-    this.setKeyboardEventListeners()
   }
 
 
@@ -29,17 +28,5 @@ class Fox {
     }
   }
 
-  setKeyboardEventListeners() {
-    //console.log("im being called")
-    window.addEventListener('keydown', event => {
-      switch (event.keyCode) {
-        case 38:
-          this.moveUp();
-          break;
-        case 40:
-          this.moveDown();
-          break;
-      }
-    });
-  }
+
 };
