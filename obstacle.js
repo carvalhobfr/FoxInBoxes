@@ -37,51 +37,10 @@ class Obstacle {
     }
   }
 
-  // deleteBox() {
-  //   const fox = this.game.fox;
-  //   let foxX = fox.positionX;
-  //   let foxY = fox.positionY;
-  //   let foxW = fox.width;
-  //   let foxH = fox.height;
-
-  //   let obsX = this.positionX;
-  //   let obsY = this.positionY;
-  //   let obsW = this.width;
-  //   let obsH = this.height;
-
-  //   const foxVal = {
-  //     foxX,
-  //     foxY,
-  //     foxW,
-  //     foxH
-  //   }
-
-  //   const obstVal = {
-  //     obsX,
-  //     obsY,
-  //     obsW,
-  //     obsH
-  //   }
-
-  //   // console.log("fox", foxVal)
-  //   // console.log("obst", obstVal)
-
-  //   if (foxX + foxW == obsX + obsW && foxX == obsX + obsW && foxY + foxH > obsY && foxY > obsY + obsH) {
-  //     this.fox.positionY += 2 * this.height;
-  //     this.game.boxs.pop();
-  //     this.game.boxs.pop();
-  //     console.log("bateu a box no obj")
-  //   }
-  // }
 
   runLogic() {
-    this.positionX -= 3;
+    let speed = Math.random() * 20;
+    this.positionX -= speed;
     this.checkCollision();
-    // for (this.game.obstacle in this.game.obstacles) {
-    //   for (this.game.box in this.game.boxs) {
-    //     this.game.deleteBox();
-    //     // console.log("deletou a caixa");
-    // }
-    // }
   }
 };

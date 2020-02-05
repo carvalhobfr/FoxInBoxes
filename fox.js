@@ -26,8 +26,6 @@ class Fox {
 
   moveDown() {
     if (this.positionX + this.width < this.game.context.canvas.width && this.positionY < 490) {
-      this.positionY += 2 * this.height;
-      //drawBox();
 
     }
   }

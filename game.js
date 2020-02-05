@@ -24,14 +24,23 @@ class Game {
   };
 
   createObstacles() {
-    for (let i = 0; i < 50; i++) {
-      let obstacle = new Obstacle(this, i * 500);
+    for (let i = 0; i < 100; i++) {
+      let obstacle = new Obstacle(this, i * 370);
       this.obstacles.push(obstacle);
+      this.positionY = 50 + Math.random() * 450;
+      this.positionX -= 10;
       // console.log(this.obstacles);
     }
+    // for (let k = 0; k < 100; k++) {
+    //   let obstacle2 = new Obstacle(this, k * 50000);
+    //   this.obstacles.push(obstacle2);
+    //   this.box.positionY = 0 + Math.random() * 50;
+    //   // console.log(this.obstacles);
+    // }
   }
 
   deleteBox() {
+    let k = 0;
     for (let obstacle in this.obstacles) {
       for (let box in this.boxs) {
         let boxY = this.boxs[box].positionY;
@@ -47,16 +56,26 @@ class Game {
         // if (boxX + boxW > obsX + obsW && boxX < obsX + obsW && boxY + boxH * 2 > obsY && boxY < obsY + obsH / 2) 
         // console.log("i dont know")
         if (boxX + boxW > obsX && boxX < obsX + obsW && boxY + boxH > obsY && boxY < obsY + obsH) {
-          this.boxs.pop();
-          this.fox.positionY = this.obstacle.positionY 
+          k += 1;
+
+
         };
       }
     }
+    if (k != 0) {
+      this.boxs.splice(-2, 2);
+      this.fox.positionY = this.fox.positionY + 2 * GRID_SIZE;
+      this.fox.drawFox();
+      this.obstacles.splice(0, 1);
+
+    }
+
+
   }
   paint() {
     this.cleanCanvas();
-    this.fox.drawFox();
     this.box.drawBox();
+    this.fox.drawFox();
     //loop through the box array to draw
     for (let i = 0; i < this.obstacles.length; i++) {
       this.obstacles[i].drawObstacle();
@@ -70,8 +89,9 @@ class Game {
   runLogic() {
     for (let i = 0; i < this.obstacles.length; i++) {
       this.obstacles[i].runLogic();
+      this.cleanCanvas();
+      this.deleteBox();
     }
-    this.deleteBox();
   }
 
   cleanCanvas = () => {
@@ -84,16 +104,9 @@ class Game {
 
   }
 
-  // reset() {
-  //   this.fox = new Fox(this);
-  //   this.obstacle = new Obstacle(this);
-  //   this.cleanCanvas();
-  //   this.gameIsRunning = true;
-  // }
-
   loop = timestamp => {
-    this.paint();
     this.runLogic();
+    this.paint();
     // console.log("hello")
     if (this.gameIsRunning) {
       window.requestAnimationFrame(this.loop);
@@ -103,3 +116,11 @@ class Game {
 
 };
 
+
+
+  // reset() {
+  //   this.fox = new Fox(this);
+  //   this.obstacle = new Obstacle(this);
+  //   this.cleanCanvas();
+  //   this.gameIsRunning = true;
+  // }
