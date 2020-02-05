@@ -21,9 +21,8 @@ class Box {
         positionX: this.positionX,
         positionY: 550 - GRID_SIZE * (this.boxes.length)
       })
-      console.log("BOXES LENGTH", this.boxes.length)
-      this.game.score += 1
     };
+
   };
 
   deleteBox() {
@@ -67,7 +66,10 @@ class Box {
         let obsW = this.game.obstacles[obstacle].width;
         if (boxX + boxW > obsX && boxX < obsX + obsW && boxY + boxH > obsY && boxY < obsY + obsH) {
           k += 1;
-        };
+        }
+        else if (obsX < 0) {
+          this.game.obstacles.splice([obstacle], 1);
+        }
       }
     }
 
@@ -75,8 +77,10 @@ class Box {
       this.boxes.splice(-2, 2);
       this.game.obstacles.splice(0, 1);
       this.game.fox.positionY = this.game.fox.positionY + 2 * GRID_SIZE;
+      this.game.score += 1
     }
   }
+
 }
 
 

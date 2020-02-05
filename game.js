@@ -8,8 +8,6 @@ class Game {
     this.setKeyboardEventListeners();
 
   }
-
-
   createObstacles() {
     for (let i = 0; i < 100; i++) {
       let obstacle = new Obstacle(this, i * 370);
