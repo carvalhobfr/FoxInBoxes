@@ -53,6 +53,8 @@ class Box {
       this.game.obstacles.splice(0, 1);
       this.game.fox.positionY = this.game.fox.positionY + 2 * GRID_SIZE;
       this.game.score += 1
+      audioBreakCrates.play();
+
     }
   }
 
