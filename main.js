@@ -7,8 +7,6 @@ window.addEventListener("load", function paintStart() {
 });
 
 
-
-
 if (!game.gameIsRunning) {
   window.addEventListener('keydown', event => {
     switch (event.keyCode) {

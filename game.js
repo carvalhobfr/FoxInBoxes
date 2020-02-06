@@ -6,17 +6,14 @@ class Game {
     this.gameIsRunning = false;
     this.score = 0;
     this.timer = 0
-    this.speed = 5000
+    this.speed = 950
     this.setKeyboardEventListeners();
 
   }
   createObstacles() {
-    console.log("create obstacles")
-    for (let i = 0; i < 300; i++) {
-      let obstacle = new Obstacle(this, i * 170);
-      this.obstacles.push(obstacle);
-      this.positionY = 50 + Math.random() * 500;
-    }
+    let obstacle = new Obstacle(this, 500);
+    this.obstacles.push(obstacle);
+    this.positionY = 100 + Math.random() * 450;
   }
 
 
@@ -35,7 +32,8 @@ class Game {
 
     //TODO - Create a logic that pushes obstacles to an array every x seconds
     if (this.timer < timestamp - this.speed) {
-      this.speed -= 100
+      this.speed *= 0.991
+      this.createObstacles();
       this.timer = timestamp
 
       console.log(timestamp)
@@ -74,6 +72,7 @@ class Game {
 
   reset() {
     this.score = 0;
+    this.speed = 950;
     //Reset obstacles array
     this.obstacles = [];
     this.createObstacles();
@@ -90,7 +89,7 @@ class Game {
     //console.log("im being called")
     window.addEventListener('keydown', event => {
       switch (event.keyCode) {
-        case 38:
+        case 32:
           this.fox.moveUp();
           break;
         case 40:

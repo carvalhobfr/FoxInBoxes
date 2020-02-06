@@ -6,12 +6,28 @@ class Fox {
     this.height = GRID_SIZE;
     this.width = GRID_SIZE * 2;
     this.box = game.box;
+
   }
 
   drawFox() {
-    const foxImage = new Image();
-    foxImage.src = './Images/jump.gif';
-    this.game.context.drawImage(foxImage, this.positionX, this.positionY, this.height, this.width);
+    switch (currentFrame) {
+      case 1: this.game.context.drawImage(foxImage1, this.positionX, this.positionY, this.height, this.width);
+        break;
+      case 2: this.game.context.drawImage(foxImage2, this.positionX, this.positionY, this.height, this.width);
+        break;
+      case 3: this.game.context.drawImage(foxImage3, this.positionX, this.positionY, this.height, this.width);
+        break;
+      case 4: this.game.context.drawImage(foxImage4, this.positionX, this.positionY, this.height, this.width);
+        break;
+
+      default:
+        break;
+    }
+    if (currentFrame === totalFrame) {
+      currentFrame = 1
+    } else {
+      currentFrame++
+    }
   }
 
   moveUp() {
