@@ -12,42 +12,32 @@ flex-direction: column;
 }
 .Header{
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: row;
   justify-content: space-between;
   width: 900px;
-  height: 70px;
+  height: 50px;
   background-color:white;
-  border-radius: 1cm;
   border-color: black;
-  border-width: 1cm;
 }
 
 .game-intro {
-  display: flex;
-  align-items: flex-start;
+  align-items: center;
   font-size: 18px;
   }
 
-.btn_start{
-  justify-content: start;
-  justify-self: start;
-}
+.Score-div{
+  align-self: center;
 
-.start-button{
-  color: #870007;
-  background-color: #870007;
 }
-
 .logo-img {
   font-size: 20px;
   background-color: #870007;
   color: #fff;
-  padding: 10px 50px;
+  padding: 2px 5px;
   border:0;
   border-radius: 5px;
   border-radius: 10px;
-  margin-bottom: 20px;
 }
 
 #game-board {
