@@ -17,10 +17,10 @@ class Game {
   }
 
 
-  paint() {
+  paint(timestamp) {
     this.cleanCanvas();
     this.box.drawBox();
-    this.fox.drawFox();
+    this.fox.drawFox(timestamp);
     this.scoreboard.paint();
     //loop through the box array to draw
     for (let i = 0; i < this.obstacles.length; i++) {
@@ -60,7 +60,7 @@ class Game {
   }
 
   loop = timestamp => {
-    this.paint();
+    this.paint(timestamp);
     this.runLogic(timestamp);
     if (this.gameIsRunning) {
       window.requestAnimationFrame(this.loop);

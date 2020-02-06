@@ -48,6 +48,7 @@ class Box {
     }
 
     if (k != 0) {
+      this.game.context.drawImage(boxExplosion, this.game.box.positionX - 60, this.game.obstacles[0].positionY + 10, this.game.fox.width * 2, this.game.fox.height * 2);
       this.boxes.splice(-2, 2);
       this.game.obstacles.splice(0, 1);
       this.game.fox.positionY = this.game.fox.positionY + 2 * GRID_SIZE;
