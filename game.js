@@ -50,6 +50,7 @@ class Game {
   };
 
   start() {
+    audio.play();
     this.reset()
     if (!this.gameIsRunning) {
       this.gameIsRunning = !this.gameIsRunning;

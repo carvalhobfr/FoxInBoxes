@@ -47,3 +47,6 @@ foxImageDie.src = './Images/Sunny-land-files/PNG/sprites/player/hurt/player-hurt
 
 const boxExplosion = new Image();
 boxExplosion.src = './Images/Sunny-land-files/PNG/sprites/item-feedback/item-feedback-4.png'
+
+
+var audio = new Audio('./Images/Hyper.wav');
