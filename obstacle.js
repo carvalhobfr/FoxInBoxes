@@ -5,8 +5,9 @@ class Obstacle {
     this.positionY = 0;
     this.width = 0;
     this.height = 0;
-    this.speed = 5
+    this.speed = 5 ** 1.01
     this.setRandomPosition();
+
   }
 
   setRandomPosition() {
@@ -20,6 +21,8 @@ class Obstacle {
     obstacleImage.src = './Images/Obstacles/baladomario.png';
     this.game.context.drawImage(obstacleImage, this.positionX, this.positionY, this.width, this.height);
   }
+
+
 
   checkCollision() {
     const fox = this.game.fox
@@ -35,6 +38,8 @@ class Obstacle {
 
     if (foxX + foxW > obsX + obsW && foxX < obsX + obsW / 2 && foxY + foxH * 2 > obsY && foxY < obsY + obsH / 2) {
       this.game.gameIsRunning = false;
+      this.game.context.drawImage(gameOverImage, 150, 0, 600, 600);
+      ///chamar função game Over aqui
     }
   }
 
@@ -42,6 +47,7 @@ class Obstacle {
   runLogic() {
     // let speed = Math.random() * 15;
     this.positionX -= this.speed;
+
     this.checkCollision();
   }
 };

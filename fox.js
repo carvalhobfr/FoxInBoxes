@@ -8,7 +8,6 @@ class Fox {
     this.box = game.box;
   }
 
-
   drawFox() {
     const foxImage = new Image();
     foxImage.src = './Images/jump.gif';

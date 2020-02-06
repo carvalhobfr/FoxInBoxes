@@ -5,16 +5,20 @@ class Game {
     this.obstacles = [];
     this.gameIsRunning = false;
     this.score = 0;
+    this.timer = 0
+    this.speed = 5000
     this.setKeyboardEventListeners();
 
   }
   createObstacles() {
-    for (let i = 0; i < 100; i++) {
-      let obstacle = new Obstacle(this, i * 370);
+    console.log("create obstacles")
+    for (let i = 0; i < 300; i++) {
+      let obstacle = new Obstacle(this, i * 170);
       this.obstacles.push(obstacle);
       this.positionY = 50 + Math.random() * 500;
     }
   }
+
 
   paint() {
     this.cleanCanvas();
@@ -27,7 +31,16 @@ class Game {
     }
   }
 
-  runLogic() {
+  runLogic(timestamp) {
+
+    //TODO - Create a logic that pushes obstacles to an array every x seconds
+    if (this.timer < timestamp - this.speed) {
+      this.speed -= 100
+      this.timer = timestamp
+
+      console.log(timestamp)
+    }
+
     for (let i = 0; i < this.obstacles.length; i++) {
       this.obstacles[i].runLogic();
     }
@@ -50,11 +63,14 @@ class Game {
 
   loop = timestamp => {
     this.paint();
-    this.runLogic();
+    this.runLogic(timestamp);
     if (this.gameIsRunning) {
       window.requestAnimationFrame(this.loop);
     }
   };
+
+
+
 
   reset() {
     this.score = 0;
@@ -82,8 +98,7 @@ class Game {
           break;
       }
     });
-  }
-
+  };
 
 };
 
