@@ -67,6 +67,7 @@ class Game {
     document.getElementById('audioOnOff').onclick = function () {
       if (_this.audioOnOff === true) {
         audio.pause();
+        audioFoxSay.pause();
         _this.audioOnOff = false;
       } else {
         audio.play();
