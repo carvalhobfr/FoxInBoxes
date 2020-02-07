@@ -37,6 +37,7 @@ class Obstacle {
     if (foxX + foxW > obsX + obsW && foxX < obsX + obsW / 2 && foxY + foxH * 2 > obsY && foxY < obsY + obsH / 2) {
       audio.pause();
       audioDie.play();
+      audioFoxSay.play();
       this.game.context.drawImage(foxImageDie, fox.positionX - 60, fox.positionY + 10, fox.width * 2, fox.height * 2);
       this.game.gameIsRunning = false;
       this.game.context.drawImage(gameOverImage, 150, 0, 600, 600);

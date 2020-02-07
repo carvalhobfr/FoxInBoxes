@@ -86,6 +86,7 @@ class Game {
 
 
   reset() {
+    audioFoxSay.pause();
     audio.play();
     audio.loop = true;
     this.score = 0;
@@ -160,9 +161,3 @@ class Game {
 
 };
 
-
-    // lose() {
-    //   if (this.isRunning == false) {
-    //     this.reset();
-    //   }
-    // }
