@@ -37,7 +37,7 @@ class Game {
       this.createObstacles();
       this.timer = timestamp
 
-      console.log(timestamp)
+      // console.log(timestamp)
     }
 
     for (let i = 0; i < this.obstacles.length; i++) {
@@ -102,19 +102,28 @@ class Game {
     this.scoreboard = new Scoreboard(this);
   }
 
+
+
+
   setKeyboardEventListeners() {
     //console.log("im being called")
-    window.addEventListener('keydown', event => {
+    window.addEventListener('keyup', event => {
+      // console.log("key released")
+      event.preventDefault();
       switch (event.keyCode) {
         case 32:
-          event.preventDefault();
           this.fox.moveUp();
           break;
         case 40:
+          event.preventDefault();
           this.fox.moveDown();
           break;
       }
-    });
+    })
+    window.addEventListener('keydown', event => {
+      // console.log("key released")
+      event.preventDefault();
+    })
   };
 
   openFullscreen() {

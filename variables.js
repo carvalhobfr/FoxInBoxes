@@ -63,3 +63,5 @@ var audioDie = new Audio("./Images/foxsounddie.mp3");
 
 var audioBreakCrates = new Audio("./Images/crate-break.mp3")
 
+var audioFoxSay = new Audio("./Images/what-does-the-fox-says-chorus.mp3");
+
