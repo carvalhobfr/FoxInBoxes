@@ -87,7 +87,6 @@ class Game {
 
   reset() {
     audio.play();
-    audio.play();
     this.score = 0;
     this.speed = 950;
     //Reset obstacles array
