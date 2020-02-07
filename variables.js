@@ -5,6 +5,15 @@ gameOverImage.src = './Images/gameover2.png';
 const startImage = new Image;
 startImage.src = './Images/pressenter.png';
 
+
+
+
+const obstacleImage = new Image();
+obstacleImage.src = './Images/Obstacles/baladomario.png';
+const obstacleImage2 = new Image();
+obstacleImage2.src = './Images/bullet2.png.jpg';
+
+
 const foxImage1 = new Image();
 foxImage1.src = './Images/Sunny-land-files/PNG/sprites/player/idle/player-idle-1.png'
 const foxImage2 = new Image();

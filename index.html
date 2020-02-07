@@ -11,32 +11,34 @@
 </head>
 
 <body>
-  <div class="MAIN">
-    <div class="Header">
-      <div class="game-intro">
-        <img src="./Images/run.gif" class="logo-img" /></div>
+  <div class="bg">
+    <div class="MAIN">
+      <div class="Header">
+        <div class="game-intro">
+          <img src="./Images/run.gif" class="logo-img" /></div>
 
+        <div>
+          <p>Use the space bar to control the Fox!</p>
+        </div>
+        <div class="Score-div">
+          <h2>Destroy the boxes to Score: <span class="Score-point">0</span></h1>
+        </div>
+      </div>
       <div>
-        <p>Use the space bar to control the Fox!</p>
+        <canvas id="game-board" width="900" height="640">
+        </canvas>
       </div>
-      <div class="Score-div">
-        <h2>Destroy the boxes to Score: <span class="Score-point">0</span></h1>
-      </div>
+      <button id="audioOnOff">Music On/Off</button>
     </div>
-    <div>
-      <canvas id="game-board" width="900" height="640">
-      </canvas>
-    </div>
+    <!-- <script type="text/javascript" src="obstacle.js"></script> -->
+    <script type="text/javascript" src="variables.js"></script>
+    <script type="text/javascript" src="box.js"></script>
+    <script type="text/javascript" src="fox.js"></script>
+    <script type="text/javascript" src="obstacle.js"></script>
+    <script type="text/javascript" src="scoreboard.js"></script>
+    <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </div>
-  <!-- <script type="text/javascript" src="obstacle.js"></script> -->
-  <script type="text/javascript" src="variables.js"></script>
-  <script type="text/javascript" src="box.js"></script>
-  <script type="text/javascript" src="fox.js"></script>
-  <script type="text/javascript" src="obstacle.js"></script>
-  <script type="text/javascript" src="scoreboard.js"></script>
-  <script type="text/javascript" src="game.js"></script>
-  <script type="text/javascript" src="main.js"></script>
-
   <!---- <footer>
     <audio id="audio-player" controls="controls" autoplay loop src="./Images/Hyper.wav" type="audio/ogg"></audio>
   </footer>-->

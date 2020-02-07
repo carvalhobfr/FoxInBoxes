@@ -17,8 +17,6 @@ class Obstacle {
   }
 
   drawObstacle() {
-    const obstacleImage = new Image();
-    obstacleImage.src = './Images/Obstacles/baladomario.png';
     this.game.context.drawImage(obstacleImage, this.positionX, this.positionY, this.width, this.height);
   }
 

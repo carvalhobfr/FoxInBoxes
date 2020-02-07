@@ -8,7 +8,8 @@ class Game {
     this.timer = 0
     this.speed = 950
     this.setKeyboardEventListeners();
-
+    this.activateAudioOnOffKey();
+    this.audioOnOff = true;
   }
   createObstacles() {
     let obstacle = new Obstacle(this, 500);
@@ -50,7 +51,7 @@ class Game {
   };
 
   start() {
-    audio.play();
+    this.openFullscreen();
     this.reset()
     if (!this.gameIsRunning) {
       this.gameIsRunning = !this.gameIsRunning;
@@ -59,6 +60,21 @@ class Game {
     setKeyboardEventListeners();
 
   }
+
+
+  activateAudioOnOffKey = () => {
+    let _this = this;
+    document.getElementById('audioOnOff').onclick = function () {
+      if (_this.audioOnOff === true) {
+        audio.pause();
+        _this.audioOnOff = false;
+      } else {
+        audio.play();
+        _this.audioOnOff = true;
+      }
+    };
+  };
+
 
   loop = timestamp => {
     this.paint(timestamp);
@@ -69,9 +85,9 @@ class Game {
   };
 
 
-
-
   reset() {
+    audio.play();
+    audio.play();
     this.score = 0;
     this.speed = 950;
     //Reset obstacles array
@@ -91,6 +107,7 @@ class Game {
     window.addEventListener('keydown', event => {
       switch (event.keyCode) {
         case 32:
+          event.preventDefault();
           this.fox.moveUp();
           break;
         case 40:
@@ -99,6 +116,39 @@ class Game {
       }
     });
   };
+
+  openFullscreen() {
+    var elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      /* Firefox */
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      /* Chrome, Safari and Opera */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      /* IE/Edge */
+      elem.msRequestFullscreen();
+    }
+  }
+  closeFullscreen() {
+    //not using for now
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      /* Firefox */
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      /* Chrome, Safari and Opera */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      /* IE/Edge */
+      document.msExitFullscreen();
+    }
+  }
+
+
 
 };
 
