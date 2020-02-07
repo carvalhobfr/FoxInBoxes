@@ -14,7 +14,7 @@ class Game {
   createObstacles() {
     let obstacle = new Obstacle(this, 500);
     this.obstacles.push(obstacle);
-    this.positionY = 100 + Math.random() * 450;
+    this.positionY = 100 + Math.random() * 400;
   }
 
 
@@ -87,6 +87,7 @@ class Game {
 
   reset() {
     audio.play();
+    audio.loop = true;
     this.score = 0;
     this.speed = 950;
     //Reset obstacles array

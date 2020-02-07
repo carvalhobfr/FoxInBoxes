@@ -13,7 +13,7 @@ class Obstacle {
   setRandomPosition() {
     this.height = 50 + Math.random() * 50;
     this.width = 100 + Math.random() * 10;
-    this.positionY = 50 + Math.random() * 450;
+    this.positionY = 50 + Math.random() * 40;
   }
 
   drawObstacle() {
