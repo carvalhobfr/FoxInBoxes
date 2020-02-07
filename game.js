@@ -133,7 +133,6 @@ class Game {
     }
   }
   closeFullscreen() {
-    //not using for now
     if (document.exitFullscreen) {
       document.exitFullscreen();
     } else if (document.mozCancelFullScreen) {
