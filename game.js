@@ -33,7 +33,7 @@ class Game {
 
     //TODO - Create a logic that pushes obstacles to an array every x seconds
     if (this.timer < timestamp - this.speed) {
-      this.speed *= 0.991
+      this.speed = this.speed * 0.991 + 0.4
       this.createObstacles();
       this.timer = timestamp
 
